@@ -1,6 +1,5 @@
-package com.wendy.demo.user.domain.output;
+package com.wendy.demo.user.domain.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +7,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Builder
-public class UserOutput {
+public class User {
     private Long id;
 
     private String name;

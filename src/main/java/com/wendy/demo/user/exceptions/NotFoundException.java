@@ -4,11 +4,11 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 @Data
-public class ToDoExceptions extends RuntimeException{
+public class NotFoundException extends RuntimeException{
     private String message;
     private HttpStatus httpStatus;
 
-    public ToDoExceptions (String message, HttpStatus httpStatus){
+    public NotFoundException(String message, HttpStatus httpStatus){
         super(message);
         this.message=message;
         this.httpStatus=httpStatus;

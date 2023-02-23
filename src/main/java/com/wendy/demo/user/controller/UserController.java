@@ -1,13 +1,9 @@
 package com.wendy.demo.user.controller;
 
-import com.wendy.demo.user.domain.entity.UserEntity;
-import com.wendy.demo.user.domain.output.UserOutput;
+
+import com.wendy.demo.user.domain.dto.User;
 import com.wendy.demo.user.service.UserService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,8 +17,24 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserOutput> findAll(){
-       return userService.findAll();
+    public List<User> findAll() {
+        return userService.findAll();
     }
 
+    @PostMapping
+    public User save(@RequestBody User user) {
+        return userService.save(user);
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public User updateUser (@PathVariable long id, @RequestBody User user){
+        user.setId(id);
+    return userService.update(user);
+    }
+
+    @DeleteMapping (value = "{id}")
+    public void deleteUser(@PathVariable Long id){
+    userService.deleteById(id);
+
+    }
 }
