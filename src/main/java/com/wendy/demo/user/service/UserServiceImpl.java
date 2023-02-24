@@ -38,14 +38,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         userRepository.findBydId(user.getId())
-                .orElseThrow(()->new DemoException(MessageCode.ERROR_10));
+                .orElseThrow(()->new DemoException(MessageCode.ERROR_02));
         return  mapUsera(userRepository.update(mapUserb(user)));
     }
 
     @Override
     public Msm deleteById(Long id) {
         userRepository.findBydId(id)
-                .orElseThrow(()->new DemoException(MessageCode.ERROR_10));
+                .orElseThrow(()->new DemoException(MessageCode.USER_NOTFOUND));
         userRepository.deleteById(id);
         Msm msm = new Msm();
         msm.setMsm("Usuario eliminado correctamente");
