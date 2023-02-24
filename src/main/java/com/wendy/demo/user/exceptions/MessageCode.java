@@ -13,6 +13,8 @@ public enum MessageCode {
 
     ERROR_10("error-10","mensaje del error 10",HttpStatus.BAD_REQUEST);
 
+
+
     private  String code;
     private  String message;
 

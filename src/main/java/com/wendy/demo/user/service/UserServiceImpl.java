@@ -1,16 +1,16 @@
 package com.wendy.demo.user.service;
 
+import com.wendy.demo.user.domain.dto.Msm;
 import com.wendy.demo.user.domain.entity.UserEntity;
 
 import com.wendy.demo.user.domain.dto.User;
 import com.wendy.demo.user.exceptions.MessageCode;
-import com.wendy.demo.user.exceptions.NotFoundException;
+import com.wendy.demo.user.exceptions.DemoException;
 import com.wendy.demo.user.repository.UserRepository;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 import java.util.stream.Collectors;
 
@@ -38,21 +38,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User user) {
         userRepository.findBydId(user.getId())
-                .orElseThrow(()->new NotFoundException(MessageCode.ERROR_10));
+                .orElseThrow(()->new DemoException(MessageCode.ERROR_10));
         return  mapUsera(userRepository.update(mapUserb(user)));
     }
 
     @Override
-    public void deleteById(Long id) {
+    public Msm deleteById(Long id) {
         userRepository.findBydId(id)
-                .orElseThrow(()->new NotFoundException(MessageCode.ERROR_10));
+                .orElseThrow(()->new DemoException(MessageCode.ERROR_10));
         userRepository.deleteById(id);
+        Msm msm = new Msm();
+        msm.setMsm("Usuario eliminado correctamente");
+        return msm ;
+
     }
+
 
     @Override
     public User findBydId(long id) {
         UserEntity entity = userRepository.findBydId(id)
-                .orElseThrow(()->new NotFoundException(MessageCode.USER_NOTFOUND));
+                .orElseThrow(()->new DemoException(MessageCode.USER_NOTFOUND));
         return mapUsera(entity);
     }
 

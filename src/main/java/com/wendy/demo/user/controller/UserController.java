@@ -1,7 +1,8 @@
 package com.wendy.demo.user.controller;
 
-
+import com.wendy.demo.user.domain.dto.Msm;
 import com.wendy.demo.user.domain.dto.User;
+
 import com.wendy.demo.user.service.UserService;
 
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,6 @@ public class UserController {
         return userService.save(user);
     }
 
-
     @GetMapping(value = "/{id}")
     public User findById(@PathVariable Long id) {
         return userService.findBydId(id);
@@ -41,8 +41,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteById(id);
-
+    public Msm deleteUser(@PathVariable Long id) {
+        return userService.deleteById(id);
     }
 }

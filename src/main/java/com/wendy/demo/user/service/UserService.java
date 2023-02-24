@@ -1,10 +1,11 @@
 package com.wendy.demo.user.service;
 
+import com.wendy.demo.user.domain.dto.Msm;
 import com.wendy.demo.user.domain.dto.User;
-import com.wendy.demo.user.domain.entity.UserEntity;
+
 
 import java.util.List;
-import java.util.Optional;
+
 
 
 public interface UserService {
@@ -15,7 +16,7 @@ public interface UserService {
 
     User update (User user);
 
-    void  deleteById (Long id);
+    Msm deleteById (Long id);
 
     User findBydId(long id);
 }

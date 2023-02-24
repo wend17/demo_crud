@@ -9,9 +9,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
-    @org.springframework.web.bind.annotation.ExceptionHandler(value = {NotFoundException.class })
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = {DemoException.class })
     protected ResponseEntity<Object> handleConflict(
-            NotFoundException ex, WebRequest request) {
+            DemoException ex, WebRequest request) {
        ResponseMessage response = new ResponseMessage();
        response.setCode(ex.getMessageCode().getCode());
        response.setMessage(ex.getMessageCode().getMessage());
@@ -20,7 +20,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     }
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {Exception.class })
     protected ResponseEntity<Object> handleException(
-            NotFoundException ex, WebRequest request) {
+            DemoException ex, WebRequest request) {
         return handleExceptionInternal(ex,"error interno",
                 new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR,request);
     }
