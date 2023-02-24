@@ -1,6 +1,7 @@
 package com.wendy.demo.user.exceptions;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -11,14 +12,16 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {NotFoundException.class })
     protected ResponseEntity<Object> handleConflict(
             NotFoundException ex, WebRequest request) {
-        String bodyOfResponse = ex.getMessage();
-        return handleExceptionInternal(ex,bodyOfResponse,
-                new HttpHeaders(), ex.getHttpStatus(),request);
+       ResponseMessage response = new ResponseMessage();
+       response.setCode(ex.getMessageCode().getCode());
+       response.setMessage(ex.getMessageCode().getMessage());
+        return handleExceptionInternal(ex,response,
+                new HttpHeaders(), ex.getMessageCode().getStatus(), request);
     }
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {Exception.class })
     protected ResponseEntity<Object> handleException(
             NotFoundException ex, WebRequest request) {
         return handleExceptionInternal(ex,"error interno",
-                new HttpHeaders(), ex.getHttpStatus(),request);
+                new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR,request);
     }
 }
