@@ -14,7 +14,7 @@ public interface UserService {
 
     User save (User user);
 
-    User update (User user);
+    User update (User user, Long id);
 
     Msm deleteById (Long id);
 

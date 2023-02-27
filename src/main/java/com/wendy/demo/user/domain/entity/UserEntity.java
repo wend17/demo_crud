@@ -1,5 +1,6 @@
 package com.wendy.demo.user.domain.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,11 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "user")
+
 @Getter
 @Setter
 public class UserEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

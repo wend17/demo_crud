@@ -1,0 +1,98 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wendy.demo.user.service</a>
+</div>
+
+<h1>Coverage Summary for Class: UserService (com.wendy.demo.user.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">UserService$MockitoMock$LvTCMe9f</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$MockitoMock$LvTCMe9f$auxiliary$ISTuicd7</td>
+  </tr>
+  <tr>
+    <td class="name">UserService$MockitoMock$LvTCMe9f$auxiliary$nAE8cI3H</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wendy.demo.user.service;
+&nbsp;
+&nbsp;import com.wendy.demo.user.domain.dto.Msm;
+&nbsp;import com.wendy.demo.user.domain.dto.User;
+&nbsp;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;public interface UserService {
+&nbsp;
+&nbsp;    List&lt;User&gt; findAll();
+&nbsp;
+&nbsp;    User save (User user);
+&nbsp;
+&nbsp;    User update (User user, Long id);
+&nbsp;
+&nbsp;    Msm deleteById (Long id);
+&nbsp;
+&nbsp;    User findBydId(long id);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-27 16:02</div>
+</div>
+</body>
+</html>

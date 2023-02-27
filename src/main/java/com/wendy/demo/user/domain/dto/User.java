@@ -20,4 +20,6 @@ public class User {
     private String documentNumber;
     private LocalDate birthday;
     private boolean active;
+
+
 }

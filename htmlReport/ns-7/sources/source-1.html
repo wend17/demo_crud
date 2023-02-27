@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.wendy.demo.user.service</a>
+</div>
+
+<h1>Coverage Summary for Class: UserServiceImpl (com.wendy.demo.user.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (38/38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.wendy.demo.user.service;
+&nbsp;
+&nbsp;import com.wendy.demo.user.domain.dto.Msm;
+&nbsp;import com.wendy.demo.user.domain.entity.UserEntity;
+&nbsp;
+&nbsp;import com.wendy.demo.user.domain.dto.User;
+&nbsp;import com.wendy.demo.user.exceptions.MessageCode;
+&nbsp;import com.wendy.demo.user.exceptions.DemoException;
+&nbsp;import com.wendy.demo.user.repository.UserRepository;
+&nbsp;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class UserServiceImpl implements UserService {
+&nbsp;
+&nbsp;    private UserRepository userRepository;
+&nbsp;
+<b class="fc">&nbsp;    public UserServiceImpl(UserRepository userRepository) {</b>
+<b class="fc">&nbsp;        this.userRepository = userRepository;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;User&gt; findAll() {
+<b class="fc">&nbsp;        return userRepository.findAll().stream()</b>
+<b class="fc">&nbsp;                .map(e -&gt; mapUsera(e))</b>
+<b class="fc">&nbsp;                .collect(Collectors.toList());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public User save(User user) {
+<b class="fc">&nbsp;        return mapUsera(userRepository.save(mapUserb(user)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public User update(User user, Long id) {
+<b class="fc">&nbsp;        userRepository.findBydId(user.getId())</b>
+<b class="fc">&nbsp;                .orElseThrow(()-&gt;new DemoException(MessageCode.USER_NOTFOUND));</b>
+<b class="fc">&nbsp;        return  mapUsera(userRepository.update(mapUserb(user)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Msm deleteById(Long id) {
+<b class="fc">&nbsp;        userRepository.findBydId(id)</b>
+<b class="fc">&nbsp;                .orElseThrow(()-&gt;new DemoException(MessageCode.USER_NOTFOUND));</b>
+<b class="fc">&nbsp;        userRepository.deleteById(id);</b>
+<b class="fc">&nbsp;        Msm msm = new Msm();</b>
+<b class="fc">&nbsp;        msm.setMsm(&quot;Usuario eliminado correctamente&quot;);</b>
+<b class="fc">&nbsp;        return msm ;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public User findBydId(long id) {
+<b class="fc">&nbsp;        UserEntity entity = userRepository.findBydId(id)</b>
+<b class="fc">&nbsp;                .orElseThrow(()-&gt;new DemoException(MessageCode.USER_NOTFOUND));</b>
+<b class="fc">&nbsp;        return mapUsera(entity);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public User mapUsera(UserEntity e) {
+<b class="fc">&nbsp;        User user = new User();</b>
+<b class="fc">&nbsp;        user.setId(e.getId());</b>
+<b class="fc">&nbsp;        user.setName(e.getName());</b>
+<b class="fc">&nbsp;        user.setSurnames(e.getSurnames());</b>
+<b class="fc">&nbsp;        user.setEmail(e.getEmail());</b>
+<b class="fc">&nbsp;        user.setDocumentType(e.getDocumentType());</b>
+<b class="fc">&nbsp;        user.setDocumentNumber(e.getDocumentNumber());</b>
+<b class="fc">&nbsp;        user.setActive(e.isActive());</b>
+<b class="fc">&nbsp;        user.setBirthday(e.getBirthday());</b>
+<b class="fc">&nbsp;        return user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public UserEntity mapUserb(User e) {
+<b class="fc">&nbsp;        UserEntity entity = new UserEntity();</b>
+<b class="fc">&nbsp;        entity.setName(e.getName());</b>
+<b class="fc">&nbsp;        entity.setId(e.getId());</b>
+<b class="fc">&nbsp;        entity.setSurnames(e.getSurnames());</b>
+<b class="fc">&nbsp;        entity.setEmail(e.getEmail());</b>
+<b class="fc">&nbsp;        entity.setDocumentType(e.getDocumentType());</b>
+<b class="fc">&nbsp;        entity.setDocumentNumber(e.getDocumentNumber());</b>
+<b class="fc">&nbsp;        entity.setActive(e.isActive());</b>
+<b class="fc">&nbsp;        entity.setBirthday(e.getBirthday());</b>
+<b class="fc">&nbsp;        return entity;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-27 16:02</div>
+</div>
+</body>
+</html>

@@ -36,9 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user) {
+    public User update(User user, Long id) {
         userRepository.findBydId(user.getId())
-                .orElseThrow(()->new DemoException(MessageCode.ERROR_02));
+                .orElseThrow(()->new DemoException(MessageCode.USER_NOTFOUND));
         return  mapUsera(userRepository.update(mapUserb(user)));
     }
 
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    private User mapUsera(UserEntity e) {
+    public User mapUsera(UserEntity e) {
         User user = new User();
         user.setId(e.getId());
         user.setName(e.getName());
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private UserEntity mapUserb(User e) {
+    public UserEntity mapUserb(User e) {
         UserEntity entity = new UserEntity();
         entity.setName(e.getName());
         entity.setId(e.getId());
