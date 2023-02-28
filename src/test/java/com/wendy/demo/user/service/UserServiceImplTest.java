@@ -3,6 +3,7 @@ package com.wendy.demo.user.service;
 import com.wendy.demo.user.domain.dto.Msm;
 import com.wendy.demo.user.domain.dto.User;
 import com.wendy.demo.user.domain.entity.UserEntity;
+import com.wendy.demo.user.exceptions.DemoException;
 import com.wendy.demo.user.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,11 +15,10 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-
 import static org.mockito.Mockito.when;
 
 class UserServiceImplTest {
@@ -49,7 +49,6 @@ class UserServiceImplTest {
     void findAll() {
         when(userRepository.findAll()).thenReturn(Arrays.<UserEntity>asList());
         assertNotNull(userService.findAll());
-
     }
 
     @Test
@@ -71,6 +70,7 @@ class UserServiceImplTest {
         assertNotNull(dos);
 
     }
+
     @Test
     void findBydId() {
         UserEntity userId = new UserEntity();
@@ -81,6 +81,15 @@ class UserServiceImplTest {
         User existingUser = userService.findBydId(userId.getId());
         assertNotNull(existingUser);
         assertThat(existingUser.getId()).isNotEqualTo(null);
+    }
+
+    @Test
+    void findByIdException() {
+        when(userRepository.findBydId(anyLong())).thenThrow(DemoException.class);
+        assertThrows(DemoException.class,
+                () -> {
+                    User user = userService.findBydId(1L);
+                });
     }
 
     @Test
@@ -98,8 +107,6 @@ class UserServiceImplTest {
         assertNotNull(existingUser);
         assertThat(existingUser.getMsm()).isNotEqualTo(null);
     }
-
-
 
 
 }
